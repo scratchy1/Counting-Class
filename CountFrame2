@@ -1,0 +1,52 @@
+import java.awt.*;
+import java.awt.event.*;
+
+public class CountFrame2 extends Frame implements ActionListener {
+    protected Button b1, b2, b3;
+    protected TextField t1;
+    private Panel panel;
+    private Frame mainFrame;
+
+    public CountFrame(Frame mainFrame, Panel panel) {
+        setSize(120, 100);
+        b1 = new Button("<");
+        t1 = new TextField("50", 4);
+        b2 = new Button(">");
+        b3 = new Button("quit");
+        this.panel = panel;
+        this.mainFrame = mainFrame;
+        t1.setEditable(false);
+        panel.add(b1);
+        panel.add(t1);
+        panel.add(b2);
+        add(b3);
+        add(panel, BorderLayout.NORTH);
+        b1.addActionListener(this);
+        b2.addActionListener(this);
+        b3.addActionListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == b3) {
+            t1.setText("50");
+            System.exit(0);
+        } else {
+            if (e.getSource() == b1) {
+                String s1 = t1.getText();
+                int zahl1 = Integer.parseInt(s1);
+                if (zahl1 >= 1) {
+                    t1.setText("" + (zahl1 - 1));
+                }
+            } else {
+                if (e.getSource() == b2) {
+                    String s2 = t1.getText();
+                    int zahl2 = Integer.parseInt(s2);
+                    if (zahl2 <= 98) {
+                        t1.setText("" + (zahl2 + 1));
+                    }
+                }
+            }
+        }
+    }
+}
